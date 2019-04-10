@@ -11,15 +11,20 @@ import {
     Label
 } from "reactstrap";
 
-
+interface Item {
+    id?: number,
+    title: string,
+    description: string,
+    completed: boolean
+}
 type ModalProps = {
-    activeItem: any,
-    toggle: ((() => void) & false) | ((() => void) & true),
-    onSave: (arg1:any) => void
+    activeItem: Item,
+    toggle: any,
+    onSave: (arg1:Item) => void
 }
 
 type ModalState = {
-    activeItem: any
+    activeItem: Item
 }
 
 export default class CustomModal extends Component<ModalProps,ModalState> {
