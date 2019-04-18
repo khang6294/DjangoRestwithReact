@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework.generics import get_object_or_404
+from rest_framework.generics import get_object_or_404,RetrieveAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 # Create your views here.
@@ -34,3 +34,6 @@ class ArticleView(APIView):
         article.delete()
         return Response({"message": "Article with id `{}` has been deleted.".format(pk)},status=204)
 
+class SingleArticleView(RetrieveAPIView):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
