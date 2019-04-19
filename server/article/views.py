@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework.generics import get_object_or_404,RetrieveAPIView
+from rest_framework.generics import get_object_or_404,RetrieveUpdateDestroyAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 # Create your views here.
@@ -21,19 +21,24 @@ class ArticleView(APIView):
             article_saved = serializer.save()
         return Response({"success": "Article '{}' created successfully".format(article_saved.title)})
 
-    def put(self,request,pk):
-        saved_article = get_object_or_404(Article.objects.all(), pk=pk)
-        data = request.data.get('article')
-        serializer = ArticleSerializer(instance = saved_article, data=data, partial=True)
-        if serializer.is_valid(raise_exception=True):
-            article_saved = serializer.save()
-        return Response({"success": "Article '{}' updated successfully".format(article_saved.title)})
+    # def put(self,request,pk):
+    #     saved_article = get_object_or_404(Article.objects.all(), pk=pk)
+    #     data = request.data.get('article')
+    #     serializer = ArticleSerializer(instance = saved_article, data=data, partial=True)
+    #     if serializer.is_valid(raise_exception=True):
+    #         article_saved = serializer.save()
+    #     return Response({"success": "Article '{}' updated successfully".format(article_saved.title)})
     
-    def delete(self, request, pk):
-        article = get_object_or_404(Article.objects.all(), pk=pk)
-        article.delete()
-        return Response({"message": "Article with id `{}` has been deleted.".format(pk)},status=204)
+    # def delete(self, request, pk):
+    #     article = get_object_or_404(Article.objects.all(), pk=pk)
+    #     article.delete()
+    #     return Response({"message": "Article with id `{}` has been deleted.".format(pk)},status=204)
 
-class SingleArticleView(RetrieveAPIView):
+class SingleArticleView(RetrieveUpdateDestroyAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
+
+    def get_serializer(self, *args, **kwargs):
+        serializer_class = self.get_serializer_class()
+        kwargs['partial'] = True
+        return serializer_class(*args, **kwargs)
