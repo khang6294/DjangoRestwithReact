@@ -8,5 +8,7 @@ class DateData(models.Model):
     total_customers = models.IntegerField()
 
     def __str__(self):
-        return self.pub_date
+        return self.pub_date.strftime('%Y-%m-%d')
+
+        
 
