@@ -16,15 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from rest_framework import routers
-from todo import views
+# from todo import views
+from datedata import views
 
-router = routers.DefaultRouter()
-router.register(r'todos', views.TodoView, 'todo')
+# router = routers.DefaultRouter()
+# router.register(r'todos', views.TodoView, 'todo')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
-    path('api/login', views.login),
+    # path('api/', include(router.urls)),
+    path('api/login', views.CustomAuthToken.as_view()),
     path('api/',include('article.urls')), 
     path('api/',include('datedata.urls'))
 ]
