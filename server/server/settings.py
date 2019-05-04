@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import custom_jwt
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -144,5 +145,5 @@ CORS_ORIGIN_WHITELIST = (
 JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER': 'custom_jwt.jwt_response_payload_handler',
     'JWT_PAYLOAD_HANDLER': 'custom_jwt.jwt_payload_handler',
-    'JWT_AUTH_HEADER_PREFIX': 'Token'
+    'JWT_AUTH_HEADER_PREFIX': 'Token',
 }

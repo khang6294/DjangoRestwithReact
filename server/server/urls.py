@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from django.conf.urls import url
 from rest_framework import routers
 # from todo import views
 from datedata import views
+from rest_framework_jwt.views import obtain_jwt_token
+
 
 # router = routers.DefaultRouter()
 # router.register(r'todos', views.TodoView, 'todo')
@@ -27,5 +30,6 @@ urlpatterns = [
     # path('api/', include(router.urls)),
     path('api/login', views.CustomAuthToken.as_view()),
     path('api/',include('article.urls')), 
-    path('api/',include('datedata.urls'))
+    path('api/',include('datedata.urls')),
+    url(r'^api-token-auth/', obtain_jwt_token)
 ]
