@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from django.conf.urls import url
+from django.conf import settings
 from rest_framework import routers
 # from todo import views
 from datedata import views
@@ -33,3 +34,9 @@ urlpatterns = [
     path('api/',include('datedata.urls')),
     url(r'^api-token-auth/', obtain_jwt_token)
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        url(r'^__debug__/',include(debug_toolbar.urls))
+    ] + urlpatterns

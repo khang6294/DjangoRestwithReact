@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
     'todo',
     'corsheaders',
     'rest_framework',
@@ -55,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware'
 ]
 
 ROOT_URLCONF = 'server.urls'
@@ -78,15 +80,15 @@ TEMPLATES = [
 WSGI_APPLICATION = 'server.wsgi.application'
 
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
-    ),
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-        'rest_framework.permissions.IsAuthenticated'
-        )
-}
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'rest_framework.authentication.TokenAuthentication',
+#     ),
+#     'DEFAULT_PERMISSION_CLASSES': (
+#         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+#         'rest_framework.permissions.IsAuthenticated'
+#         )
+# }
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
@@ -147,3 +149,7 @@ JWT_AUTH = {
     'JWT_PAYLOAD_HANDLER': 'custom_jwt.jwt_payload_handler',
     'JWT_AUTH_HEADER_PREFIX': 'Token',
 }
+
+INTERNAL_IPS = [
+    '127.0.0.1'
+]

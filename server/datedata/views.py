@@ -11,7 +11,7 @@ from rest_framework.authtoken.models import Token
 
 class DateDataView(ListAPIView):
     serializer_class = DateDataSerializer
-    permission_classes = (permissions.IsAuthenticated,)
+    # permission_classes = (permissions.IsAuthenticated,)
     def get_queryset(self):
         start_date_arr =  self.request.query_params.get('start_date',None).split('-')
         end_date_arr = self.request.query_params.get('end_date',None).split('-')
